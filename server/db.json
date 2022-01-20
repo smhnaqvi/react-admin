@@ -1,0 +1,29 @@
+{
+    "Units": [
+        {
+            "id": 1,
+            "unit_code": "g",
+            "unit_name": "گرم"
+        },
+        {
+            "id": 2,
+            "unit_code": "kg",
+            "unit_name": "کیلوگرم"
+        },
+        {
+            "id": 3,
+            "unit_code": "kg",
+            "unit_name": "کیلوگرم"
+        },
+        {
+            "id": 4,
+            "unit_code": "kg",
+            "unit_name": "کیلوگرم"
+        },
+        {
+            "id": 5,
+            "unit_code": "kg",
+            "unit_name": "کیلوگرم"
+        }
+    ]
+}
