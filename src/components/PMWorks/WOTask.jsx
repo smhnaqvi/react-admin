@@ -7,10 +7,11 @@ const TaskBulkActionButtons = props => {
     const handleClickOpen = () => () => {
         setOpen(true);
     };
+    const {selectedIds} = props;
     return (
         <Fragment>
             <CreateButton label="افزودن کار جدید" onClick={handleClickOpen()} />
-            {open ? <ScrollDialog open={open} setOpen={setOpen} {...props} /> : null}
+            {open ? <ScrollDialog open={open} setOpen={setOpen} taskSelectedIds={selectedIds} /> : null}
         </Fragment>
     )
 };
@@ -19,6 +20,9 @@ const WOTask = (props) => {
     return <List {...props} bulkActionButtons={<TaskBulkActionButtons />}>
         <Datagrid>
             <TextField source="id" />
+            <TextField source="WorkOrderID" />
+            <TextField source="TaskId" />
+            <TextField source="WOTaskSituationOfDo" />
         </Datagrid>
     </List>
 }

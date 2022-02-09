@@ -1,11 +1,8 @@
 // in src/Menu.js
 import * as React from 'react';
-import { createElement } from 'react';
 import { useSelector } from 'react-redux';
-import { useMediaQuery } from '@material-ui/core';
 import { DashboardMenuItem, Menu, MenuItemLink, getResources } from 'react-admin';
 import DefaultIcon from '@material-ui/icons/ViewList';
-import LabelIcon from '@material-ui/icons/Label';
 
 export const TopMenu = (props) => {
     const resources = useSelector(getResources);
