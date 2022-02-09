@@ -1,42 +1,53 @@
-import * as React from "react";
-import { Admin, Resource, Layout } from 'react-admin';
-import jsonServerProvider from 'ra-data-json-server';
+import React from "react"
+import  {Admin, Resource, Layout } from 'react-admin';
+import drfProvider, { fetchJsonWithAuthJWTToken, jwtTokenAuthProvider } from 'ra-data-django-rest-framework';
 import "./styles.css";
 
 import { createTheme } from '@material-ui/core/styles';
-import { jssPreset } from '@material-ui/core/styles';
-import { create } from 'jss';
-import rtl from 'jss-rtl';
-
-import Posts from "./components/Posts"
 import { TopMenu } from './components/Menu';
 
+//[page components]
+// import WOPersonnel from "./components/PMWorks/WOPersonnel"
+import WOTask from "./components/PMWorks/WOTask"
+import Personnel from "./components/PMWorks/Personnel"
+
+import farsiMessages from 'ra-language-farsi';
+import polyglotI18nProvider from 'ra-i18n-polyglot';
+
+
 // Configure JSS
-const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
+// const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const theme = createTheme({
   direction: 'rtl',
 });
 
 
-const dataProvider = jsonServerProvider('http://localhost:7000')
+// const dataProvider = jsonServerProvider('http://localhost:7000')
 
 
 export const CostomLayout = (props) => <Layout {...props} menu={TopMenu} />;
 
-import farsiMessages from 'ra-language-farsi';
-import polyglotI18nProvider from 'ra-i18n-polyglot';
+
 
 const messages = {
-    'fa': farsiMessages,
+  'fa': farsiMessages,
 };
 
 const i18nProvider = polyglotI18nProvider(locale => messages[locale], 'fa');
 
+
+
+// server data provider
+const dataProvider = drfProvider("http://185.231.115.209:8080/", fetchJsonWithAuthJWTToken);
+let authProvider = jwtTokenAuthProvider({ obtainAuthTokenUrl: "http://185.231.115.209:8080/PMWorks/token/" });
+
 export default function App() {
   return (
-      <Admin theme={theme} dataProvider={dataProvider} i18nProvider={i18nProvider}>
-        <Resource name="units" {...Posts} />
-      </Admin>
+    <Admin theme={theme} dataProvider={dataProvider} i18nProvider={i18nProvider} authProvider={authProvider}>
+      <Resource name="PMWorks/WOTask" options={{ label: 'کارها' }} list={WOTask} />
+      <Resource name="PMWorks/Personnel" options={{ label: 'پرسنل' }} list={Personnel} />
+      {/* <Resource name="PMWorks/WOPersonnel" options={{ label: 'کارهای پرسنل' }} list={WOPersonnel} /> */}
+    </Admin>
   );
 }
