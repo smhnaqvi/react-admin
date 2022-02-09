@@ -4,7 +4,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import { Datagrid, TextField, List, ResourceContextProvider, useMutation, useNotify, Loading } from "react-admin";
+import { Datagrid, TextField, List, ResourceContextProvider, useMutation, useNotify, Loading,CreateButton } from "react-admin";
 import { TextField as MuiTextField } from "@material-ui/core"
 export default function ScrollDialog(props) {
   let { open, setOpen, taskSelectedIds } = props;
@@ -70,7 +70,9 @@ export default function ScrollDialog(props) {
     const { selectedIds } = props;
     setPersonnalIds(selectedIds)
     return (
-      <React.Fragment></React.Fragment>
+      <React.Fragment>
+        <CreateButton onClick={handleSubmit} label={"ثبت اطلاعات"} />
+      </React.Fragment>
     )
   };
 
@@ -79,7 +81,7 @@ export default function ScrollDialog(props) {
   const PersonnalList = () => {
     return (
       <ResourceContextProvider value={"PMWorks/Personnel"}>
-        <List basePath="PMWorks/Personnel" bulkActionButtons={<PersonnelBulkActionButtons />} >
+        <List basePath="PMWorks/Personnel" bulkActionButtons={<PersonnelBulkActionButtons />} exporter={false} >
           <Datagrid>
             <TextField source="id" />
             <TextField source="PersonnelCode" />
@@ -112,15 +114,6 @@ export default function ScrollDialog(props) {
               <PersonnalList />
             </DialogContentText>
           </DialogContent>
-
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              انصراف
-            </Button>
-            <Button onClick={handleSubmit} color="primary">
-              ثبت
-            </Button>
-          </DialogActions>
         </React.Fragment>
       }
     </Dialog>

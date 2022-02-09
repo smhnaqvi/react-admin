@@ -1,5 +1,5 @@
 import React from "react"
-import  {Admin, Resource, Layout } from 'react-admin';
+import { Admin, Resource, Layout } from 'react-admin';
 import drfProvider, { fetchJsonWithAuthJWTToken, jwtTokenAuthProvider } from 'ra-data-django-rest-framework';
 import "./styles.css";
 
@@ -13,6 +13,7 @@ import Personnel from "./components/PMWorks/Personnel"
 
 import farsiMessages from 'ra-language-farsi';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
+import WOPersonnel from "./components/PMWorks/WOPersonnel";
 
 
 // Configure JSS
@@ -46,8 +47,7 @@ export default function App() {
   return (
     <Admin theme={theme} dataProvider={dataProvider} i18nProvider={i18nProvider} authProvider={authProvider}>
       <Resource name="PMWorks/WOTask" options={{ label: 'کارها' }} list={WOTask} />
-      <Resource name="PMWorks/Personnel" options={{ label: 'پرسنل' }} list={Personnel} />
-      {/* <Resource name="PMWorks/WOPersonnel" options={{ label: 'کارهای پرسنل' }} list={WOPersonnel} /> */}
+      <Resource name="PMWorks/WOPersonnel" options={{ label: 'کارهای پرسنل' }} list={WOPersonnel} />
     </Admin>
   );
 }
