@@ -1,22 +1,15 @@
-import React, { useEffect } from "react";
-import Button from "@material-ui/core/Button";
+import React from "react";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import { Datagrid, TextField, List, ResourceContextProvider, useMutation, useNotify, Loading,CreateButton } from "react-admin";
-import { TextField as MuiTextField } from "@material-ui/core"
+import { Datagrid, TextField, List, useMutation, useNotify, Loading, CreateButton, NumberInput, SimpleForm, ResourceContextProvider } from "react-admin";
+import { DateInput } from "./../JalaliDatePicker"
 export default function ScrollDialog(props) {
   let { open, setOpen, taskSelectedIds } = props;
 
-
-  let now = new Date();
-  let time = now.getHours() + ":" + now.getMinutes()
-  let date = now.getFullYear() + "-" + now.getMonth() + "-" + now.getDay()
-
   const [personnalSelectedIds, setPersonnalIds] = React.useState();
-  const [taskTime, setTaskTime] = React.useState(time);
-  const [taskDate, setTaskDate] = React.useState(date);
+  const [taskTime, setTaskTime] = React.useState(0);
+  const [taskDate, setTaskDate] = React.useState();
 
   const handleClose = () => {
     setOpen(false);
@@ -40,6 +33,7 @@ export default function ScrollDialog(props) {
 
 
   const handleSubmit = () => {
+
     //Check that the values are not empty
     if (taskTime === null || taskTime === undefined || taskTime === "") return
     if (taskDate === null || taskDate === undefined || taskDate === "") return
@@ -65,7 +59,6 @@ export default function ScrollDialog(props) {
   };
 
 
-
   const PersonnelBulkActionButtons = props => {
     const { selectedIds } = props;
     setPersonnalIds(selectedIds)
@@ -77,25 +70,17 @@ export default function ScrollDialog(props) {
   };
 
 
-
   const PersonnalList = () => {
     return (
-      <ResourceContextProvider value={"PMWorks/Personnel"}>
-        <List basePath="PMWorks/Personnel" bulkActionButtons={<PersonnelBulkActionButtons />} exporter={false} >
+      <ResourceContextProvider value="PMWorks/Personnel" >
+        <List basePath="/PMWorks/Personnel" bulkActionButtons={<PersonnelBulkActionButtons />} exporter={false} >
           <Datagrid>
             <TextField source="id" />
-            <TextField source="PersonnelCode" />
-            {/* <TextField source="PersonnelName" /> */}
-            {/* <TextField source="PersonnelFamily" /> */}
           </Datagrid>
         </List>
       </ResourceContextProvider>
     )
   }
-
-
-
-
 
   return (
     <Dialog
@@ -107,10 +92,11 @@ export default function ScrollDialog(props) {
       {loading ? <Loading /> :
         <React.Fragment>
           <DialogContent>
-
             <DialogContentText id="alert-dialog-description">
-              <MuiTextField type={"date"} label="تاریخ" fullWidth value={taskDate} onChange={(e) => setTaskDate(e.target.value)} />
-              <MuiTextField type={"time"} label="زمان" fullWidth value={taskTime} onChange={(e) => setTaskTime(e.target.value)} />
+              <SimpleForm toolbar={false}>
+                <DateInput label={"تاریخ"} source={"WRDate"} value={taskDate} onChange={(e) => setTaskDate(e.target.value)} />
+                <NumberInput label={"زمان"} source={"WRTime"} value={taskTime} onChange={(e) => setTaskTime(e.target.value)} />
+              </SimpleForm>
               <PersonnalList />
             </DialogContentText>
           </DialogContent>
@@ -119,5 +105,3 @@ export default function ScrollDialog(props) {
     </Dialog>
   );
 }
-
-

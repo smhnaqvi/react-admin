@@ -9,7 +9,6 @@ import { TopMenu } from './components/Menu';
 //[page components]
 // import WOPersonnel from "./components/PMWorks/WOPersonnel"
 import WOTask from "./components/PMWorks/WOTask"
-import Personnel from "./components/PMWorks/Personnel"
 
 import farsiMessages from 'ra-language-farsi';
 import polyglotI18nProvider from 'ra-i18n-polyglot';

@@ -7,7 +7,7 @@ const TaskBulkActionButtons = props => {
     const handleClickOpen = () => () => {
         setOpen(true);
     };
-    const {selectedIds} = props;
+    const { selectedIds } = props;
     return (
         <Fragment>
             <CreateButton label="افزودن کار جدید" onClick={handleClickOpen()} />
@@ -16,15 +16,22 @@ const TaskBulkActionButtons = props => {
     )
 };
 
+
+
 const WOTask = (props) => {
-    return <List {...props} bulkActionButtons={<TaskBulkActionButtons />}>
-        <Datagrid>
-            <TextField source="id" />
-            <TextField source="WorkOrderID" />
-            <TextField source="TaskId" />
-            <TextField source="WOTaskSituationOfDo" />
-        </Datagrid>
-    </List>
+    return (
+        <Fragment>
+            <List {...props} bulkActionButtons={<TaskBulkActionButtons />}>
+                <Datagrid>
+                    <TextField source="id" />
+                    <TextField source="WorkOrderID" />
+                    <TextField source="TaskId" />
+                    <TextField source="WOTaskSituationOfDo" />
+                </Datagrid>
+            </List>
+        </Fragment>
+    )
+
 }
 
 

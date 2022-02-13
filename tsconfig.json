@@ -9,7 +9,7 @@
       "dom",
       "es2015"
     ],
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "target": "es5",
     "allowJs": true,
     "skipLibCheck": true,
