@@ -47,6 +47,7 @@ export default function App() {
     <Admin theme={theme} dataProvider={dataProvider} i18nProvider={i18nProvider} authProvider={authProvider}>
       <Resource name="PMWorks/WOTask" options={{ label: 'کارها' }} list={WOTask} />
       <Resource name="PMWorks/WOPersonnel" options={{ label: 'کارهای پرسنل' }} list={WOPersonnel} />
+      <Resource name="PMWorks/Personnel" options={{ label: 'پرسنل ها' }} />
     </Admin>
   );
 }
