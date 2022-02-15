@@ -9,7 +9,6 @@ export default function ScrollDialog(props) {
 
   const [personnalSelectedIds, setPersonnalIds] = React.useState();
   const [taskTime, setTaskTime] = React.useState(0);
-  const [taskDate, setTaskDate] = React.useState();
 
   const handleClose = () => {
     setOpen(false);
@@ -34,6 +33,12 @@ export default function ScrollDialog(props) {
 
   const handleSubmit = () => {
 
+    let taskDate = document.getElementById("DateInputEl001")
+    console.log(taskTime);
+    console.log(taskDate.value);
+    console.log(taskSelectedIds);
+    console.log(personnalSelectedIds);
+
     //Check that the values are not empty
     if (taskTime === null || taskTime === undefined || taskTime === "") return
     if (taskDate === null || taskDate === undefined || taskDate === "") return
@@ -50,7 +55,7 @@ export default function ScrollDialog(props) {
             WOTaskID: taskId,
             PersonnelID: personId,
             WorkDate: taskDate,
-            WorkTime: taskTime,
+            WorkTime: parseInt(taskTime),
           }
         }
       })
@@ -82,6 +87,7 @@ export default function ScrollDialog(props) {
     )
   }
 
+
   return (
     <Dialog
       open={open}
@@ -94,8 +100,8 @@ export default function ScrollDialog(props) {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               <SimpleForm toolbar={false}>
-                <DateInput label={"تاریخ"} source={"WRDate"} value={taskDate} onChange={(e) => setTaskDate(e.target.value)} />
-                <NumberInput label={"زمان"} source={"WRTime"} value={taskTime} onChange={(e) => setTaskTime(e.target.value)} />
+                <DateInput options={{ id: "DateInputEl001" }} isRequired={true} label={"تاریخ"} source={"WRDate"} />
+                <NumberInput isRequired={true} label={"زمان"} source={"WRTime"} value={taskTime} onChange={(e) => setTaskTime(e.target.value)} />
               </SimpleForm>
               <PersonnalList />
             </DialogContentText>

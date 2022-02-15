@@ -6,8 +6,7 @@ import { TimePicker, DateTimePicker, DatePicker, MuiPickersUtilsProvider } from 
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-    width: { width: 256 },
-
+  width: { width: 256 },
 });
 
 JalaliUtils.prototype.getDatePickerHeaderText = (date) => date.format("ddd, jMMMM jD");
@@ -18,10 +17,9 @@ const Picker = ({ PickerComponent, ...fieldProps }) => {
 
   const { input } = useInput({ source });
 
-  const handleChange = useCallback(
-    (value) => (Date.parse(value) ? input.onChange(value.toISOString()) : input.onChange(null)),
-    [input],
-  );
+  const inputOnChangehandler = (value) => (Date.parse(value) ? input.onChange(value.toISOString()) : input.onChange(null))
+  const handleChange = useCallback(inputOnChangehandler, [input]);
+
   const classes = useStyles();
 
   return (
@@ -36,7 +34,7 @@ const Picker = ({ PickerComponent, ...fieldProps }) => {
         clearLabel="پاک کردن"
         todayLabel="امروز"
         labelFunc={(date) => (date ? date.format("jDD jMMMM jYYYY") : "")}
-        value={input.value ? new Date(input.value) : null}
+        value={input.value ? new Date(input.value) : new Date()}
         onChange={(date) => handleChange(date)}
         inputVariant="filled"
         margin="dense"
