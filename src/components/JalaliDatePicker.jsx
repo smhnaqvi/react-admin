@@ -10,15 +10,21 @@ const useStyles = makeStyles({
 });
 
 JalaliUtils.prototype.getDatePickerHeaderText = (date) => date.format("ddd, jMMMM jD");
-jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
+jMoment.loadPersian({ dialect: "persian-modern"});
 
 const Picker = ({ PickerComponent, ...fieldProps }) => {
-  const { options, label, source, resource, isRequired, providerOptions } = fieldProps;
-
+  const { options, label, source, resource, isRequired, providerOptions, onChangeValue } = fieldProps;
   const { input } = useInput({ source });
 
-  const inputOnChangehandler = (value) => (Date.parse(value) ? input.onChange(value.toISOString()) : input.onChange(null))
-  const handleChange = useCallback(inputOnChangehandler, [input]);
+  const inputOnChangeHandler = (value) => {
+    if(Date.parse(value)){
+      onChangeValue(value)
+      return input.onChange(value.toISOString())
+    }
+
+    return  input.onChange(null)
+  }
+  const handleChange = useCallback(inputOnChangeHandler, [input, onChangeValue]);
 
   const classes = useStyles();
 

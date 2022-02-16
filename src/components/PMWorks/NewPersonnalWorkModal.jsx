@@ -3,27 +3,18 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import { Datagrid, TextField, List, useMutation, useNotify, Loading, CreateButton, NumberInput, SimpleForm, ResourceContextProvider } from "react-admin";
-import { DateInput } from "./../JalaliDatePicker"
+import { DateInput } from "../JalaliDatePicker"
 export default function ScrollDialog(props) {
   let { open, setOpen, taskSelectedIds } = props;
 
   const [personnalSelectedIds, setPersonnalIds] = React.useState();
-  const [taskTime, setTaskTime] = React.useState(0);
+  const [taskTime, setTaskTime] = React.useState(null);
+  const [taskDate, setTaskDate] = React.useState(null);
 
+  //close dialog window
   const handleClose = () => {
     setOpen(false);
   };
-
-
-  const descriptionElementRef = React.useRef(null);
-  React.useEffect(() => {
-    if (open) {
-      const { current: descriptionElement } = descriptionElementRef;
-      if (descriptionElement !== null) {
-        descriptionElement.focus();
-      }
-    }
-  }, [open]);
 
 
   const [mutate, { loading }] = useMutation();
@@ -33,9 +24,8 @@ export default function ScrollDialog(props) {
 
   const handleSubmit = () => {
 
-    let taskDate = document.getElementById("DateInputEl001")
     console.log(taskTime);
-    console.log(taskDate.value);
+    console.log(taskDate);
     console.log(taskSelectedIds);
     console.log(personnalSelectedIds);
 
@@ -60,7 +50,7 @@ export default function ScrollDialog(props) {
         }
       })
     ))
-    notify('Changes saved`', { undoable: true });
+    notify('اطلاعات با موفقت ذخیره شد', { undoable: true });
   };
 
 
@@ -87,6 +77,9 @@ export default function ScrollDialog(props) {
     )
   }
 
+  const handleInputValue = (date) => {
+    setTaskDate(date.format('YYYY-MM-DD'))
+  }
 
   return (
     <Dialog
@@ -100,7 +93,7 @@ export default function ScrollDialog(props) {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               <SimpleForm toolbar={false}>
-                <DateInput options={{ id: "DateInputEl001" }} isRequired={true} label={"تاریخ"} source={"WRDate"} />
+                <DateInput onChangeValue={handleInputValue} options={{ id: "DateInputEl001" }} isRequired={true} label={"تاریخ"} source={"WRDate"} />
                 <NumberInput isRequired={true} label={"زمان"} source={"WRTime"} value={taskTime} onChange={(e) => setTaskTime(e.target.value)} />
               </SimpleForm>
               <PersonnalList />
