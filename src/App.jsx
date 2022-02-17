@@ -14,6 +14,10 @@ import farsiMessages from 'ra-language-farsi';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
 import WOPersonnel from "./components/PMWorks/WOPersonnel";
 
+import DocumentList from './Document/DocumentList';
+import DocumentCreate from './Document/DocumentCreate';
+import DocumentEdit from './Document/DocumentEdit';
+import DocumentShow from './Document/DocumentShow';
 
 // Configure JSS
 // const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -48,6 +52,7 @@ export default function App() {
       <Resource name="PMWorks/WOTask" options={{ label: 'کارها' }} list={WOTask} />
       <Resource name="PMWorks/WOPersonnel" options={{ label: 'کارهای پرسنل' }} list={WOPersonnel} />
       <Resource name="PMWorks/Personnel" options={{ label: 'پرسنل ها' }} />
+      <Resource name="PMWorks/Document" options={{ label: 'فایل ها'}} list={DocumentList} edit={DocumentEdit} create={DocumentCreate} show={DocumentShow}/>
     </Admin>
   );
 }
