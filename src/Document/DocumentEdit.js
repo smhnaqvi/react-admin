@@ -8,7 +8,6 @@ import {
 }
 from 'react-admin';
 import DocumentTitle from './DocumentTitle';
-import RichTextInput from 'ra-input-rich-text';
 
 
 const DocumentEdit = props => (

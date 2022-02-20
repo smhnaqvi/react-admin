@@ -19,6 +19,8 @@ import DocumentCreate from './Document/DocumentCreate';
 import DocumentEdit from './Document/DocumentEdit';
 import DocumentShow from './Document/DocumentShow';
 
+import uploadBase64FeatureProvider from "./utilities/uploadBase64Feature"
+
 // Configure JSS
 // const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
@@ -44,15 +46,19 @@ const i18nProvider = polyglotI18nProvider(locale => messages[locale], 'fa');
 
 // server data provider
 const dataProvider = drfProvider("http://185.231.115.209:8080/", fetchJsonWithAuthJWTToken);
+
+// conver file to base64 string then sent to the server
+const uploadCapableDataProvider = uploadBase64FeatureProvider(dataProvider);
+
 let authProvider = jwtTokenAuthProvider({ obtainAuthTokenUrl: "http://185.231.115.209:8080/PMWorks/token/" });
 
 export default function App() {
   return (
-    <Admin theme={theme} dataProvider={dataProvider} i18nProvider={i18nProvider} authProvider={authProvider}>
+    <Admin theme={theme} dataProvider={uploadCapableDataProvider} i18nProvider={i18nProvider} authProvider={authProvider}>
       <Resource name="PMWorks/WOTask" options={{ label: 'کارها' }} list={WOTask} />
       <Resource name="PMWorks/WOPersonnel" options={{ label: 'کارهای پرسنل' }} list={WOPersonnel} />
       <Resource name="PMWorks/Personnel" options={{ label: 'پرسنل ها' }} />
-      <Resource name="PMWorks/Document" options={{ label: 'فایل ها'}} list={DocumentList} edit={DocumentEdit} create={DocumentCreate} show={DocumentShow}/>
+      <Resource name="PMWorks/Document" options={{ label: 'فایل ها' }} list={DocumentList} edit={DocumentEdit} create={DocumentCreate} show={DocumentShow} />
     </Admin>
   );
 }
