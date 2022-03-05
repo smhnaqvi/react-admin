@@ -18,6 +18,8 @@ import DocumentList from './Document/DocumentList';
 import DocumentCreate from './Document/DocumentCreate';
 import DocumentEdit from './Document/DocumentEdit';
 import DocumentShow from './Document/DocumentShow';
+import WorkOrderList from './WorkOrder/WorkOrderList';
+import WorkOrderShow from './WorkOrder/WorkOrderShow';
 
 import uploadBase64FeatureProvider from "./utilities/uploadBase64Feature"
 
@@ -58,7 +60,10 @@ export default function App() {
       <Resource name="PMWorks/WOTask" options={{ label: 'کارها' }} list={WOTask} />
       <Resource name="PMWorks/WOPersonnel" options={{ label: 'کارهای پرسنل' }} list={WOPersonnel} />
       <Resource name="PMWorks/Personnel" options={{ label: 'پرسنل ها' }} />
+      <Resource name="PMWorks/WOSparePart" />
+      <Resource name="PMWorks/SparePart" />
       <Resource name="PMWorks/Document" options={{ label: 'فایل ها' }} list={DocumentList} edit={DocumentEdit} create={DocumentCreate} show={DocumentShow} />
+      <Resource name="PMWorks/WorkOrder" options={{ label: 'کارپرسنل' }} list={WorkOrderList} show={WorkOrderShow} />
     </Admin>
   );
 }
