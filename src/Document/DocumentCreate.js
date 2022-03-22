@@ -15,10 +15,10 @@ const DocumentCreate = props => {
         <TextInput label="کد سند" textAlgin="right" source="DocumentCode" />
         <TextInput label="نام سند" textAlgin="right" source="DocumentName" />
         <TextInput multiline label="توضیحات سند" textAlgin="right" source="DocumentDescription" />
-        <ImageInput source="pictures" label="فایل سند" accept="application/pdf"  placeholder={<p>فایل خود را در اینجا بکشید و رها کنید</p>}>
+        <ImageInput source="FileAddress" label="فایل سند" accept="application/pdf"  placeholder={<p>فایل خود را در اینجا بکشید و رها کنید</p>}>
           <ImageField source="src" title="title" />
         </ImageInput>
-      </SimpleForm>
+      </SimpleForm>   
     </Create>
   );
 };

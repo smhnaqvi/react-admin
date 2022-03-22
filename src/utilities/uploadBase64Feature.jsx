@@ -13,10 +13,11 @@ const convertFileToBase64 = file =>
  * For posts update only, convert uploaded image in base 64 and attach it to
  * the `picture` sent property, with `src` and `title` attributes.
  */
-const uploadBase64FeatureProvider = (dataProvider) => ({
+const uploadBase64FeatureProvider = (dataProvider) => ({ // FileAddress
     ...dataProvider,
     update: (resource, params) => {
-        if (resource !== 'posts' || !params.data.pictures) {
+        console.log(params.data)
+        if (params.data.FileAddress) {
             // fallback to the default implementation
             return dataProvider.update(resource, params);
         }
